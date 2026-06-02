@@ -35,5 +35,16 @@ function Index() {
     return <div className="min-h-screen bg-background" />;
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div 
+      style={{
+        backgroundImage: 'url(https://qtbkvshbmqlszncxlcuc.supabase.co/storage/v1/object/public/dsl-uploads/bQZ16yjmBeOoJMzB8a0h9m0Uelt1/f91bc69c-a8f3-4a62-8a25-074c8e7ee0d0.png)',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+      }}
+      dangerouslySetInnerHTML={{ __html: html }} 
+    />
+  );
 }
