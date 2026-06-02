@@ -1,29 +1,39 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Protocolo Cake Burger — O doce que vira febre" },
+      {
+        name: "description",
+        content:
+          "Crie Cake Burgers irresistíveis e transforme curiosidade em pedidos pelo Instagram e WhatsApp.",
+      },
+      { property: "og:title", content: "Protocolo Cake Burger" },
+      {
+        property: "og:description",
+        content:
+          "O doce que faz clientes perguntarem como comprar antes mesmo de saber o preço.",
+      },
     ],
+    links: [{ rel: "stylesheet", href: "/cloned/styles.css" }],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  const [html, setHtml] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/cloned/body.html")
+      .then((r) => r.text())
+      .then(setHtml);
+  }, []);
+
+  if (!html) {
+    return <div className="min-h-screen bg-background" />;
+  }
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
