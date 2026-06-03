@@ -14,13 +14,19 @@
       100% { background-position: 200% center; }
     }
     .highlight-marker {
-      box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6);
-      animation: marker-pulse 2.5s ease-in-out infinite;
-      border-radius: 4px;
+      position: relative;
+      display: inline-block;
+      background-image: linear-gradient(120deg, rgba(255, 215, 0, 0.85) 0%, rgba(255, 215, 0, 0.85) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 60%;
+      background-position: 0 85%;
+      padding: 0 4px;
+      border-radius: 2px;
+      animation: marker-pulse 2.8s ease-in-out infinite;
     }
     @keyframes marker-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6); }
-      50% { box-shadow: 0 0 12px 4px rgba(255, 215, 0, 0.5); }
+      0%, 100% { background-size: 100% 60%; filter: drop-shadow(0 0 0 rgba(255, 215, 0, 0)); }
+      50% { background-size: 100% 70%; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.55)); }
     }
     .text-gradient-primary {
       background: linear-gradient(90deg, #FF0080, #FF8C00, #FFD700, #FF0080);
@@ -94,7 +100,7 @@
               </svg>
               O doce que está virando febre
             </span>
-            <h1 class="font-display text-[34px] leading-[1.02] font-extrabold tracking-tight md:text-6xl">O doce que faz clientes<!-- --> <span class="highlight-marker text-foreground bg-[#FFD700] px-1">perguntarem</span> <span class="shine-text">como comprar</span> <!-- -->antes mesmo de saber o<!-- --> <span class="relative inline-block">preço<svg class="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6 Q 50 1, 100 5 T 198 4" stroke="oklch(0.68 0.22 5)" stroke-width="3" fill="none" stroke-linecap="round"></path></svg></span>.</h1>
+            <h1 class="font-display text-[34px] leading-[1.02] font-extrabold tracking-tight md:text-6xl">O doce que faz clientes<!-- --> <span class="highlight-marker text-foreground">perguntarem</span> <span class="shine-text">como comprar</span> <!-- -->antes mesmo de saber o<!-- --> <span class="relative inline-block">preço<svg class="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6 Q 50 1, 100 5 T 198 4" stroke="oklch(0.68 0.22 5)" stroke-width="3" fill="none" stroke-linecap="round"></path></svg></span>.</h1>
             <p class="text-black mx-auto mt-5 max-w-md text-base font-semibold leading-relaxed md:mx-0 md:text-lg [text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]">Aprenda a criar Cake Burgers irresistíveis e transforme  <span style="color: #FF0080; font-weight: 800; text-shadow: 0 0 8px rgba(255, 0, 128, 0.4); border-bottom: 2px solid rgba(255, 0, 128, 0.3);">curiosidade</span>  em pedidos pelo Instagram e WhatsApp.</p>
             <div class="mt-6 flex flex-wrap justify-center gap-2.5 md:justify-start">
               <div class="bg-card/90 border-border/60 shadow-card flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur">
