@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import bodyHtml from "../../public/cloned/body.html?raw";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,27 +17,18 @@ export const Route = createFileRoute("/")({
           "O doce que faz clientes perguntarem como comprar antes mesmo de saber o preço.",
       },
     ],
-    links: [{ rel: "stylesheet", href: "/cloned/styles.css" }],
+    links: [
+      { rel: "stylesheet", href: "/cloned/styles.css" },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/cloned/a41ee0a536b6.webp",
+      },
+    ],
   }),
   component: Index,
 });
 
 function Index() {
-  const [html, setHtml] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/cloned/body.html")
-      .then((r) => r.text())
-      .then(setHtml);
-  }, []);
-
-  if (!html) {
-    return <div className="min-h-screen bg-background" />;
-  }
-
-  return (
-    <div 
-      dangerouslySetInnerHTML={{ __html: html }} 
-    />
-  );
+  return <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />;
 }
