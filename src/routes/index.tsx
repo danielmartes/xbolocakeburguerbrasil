@@ -1,16 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-
-const getBodyHtml = createServerFn({ method: "GET" }).handler(async () => {
-  const url = new URL("../../public/cloned/body.html", import.meta.url);
-  const { readFile } = await import("node:fs/promises");
-  try {
-    return await readFile(url, "utf-8");
-  } catch {
-    const res = await fetch("/cloned/body.html");
-    return await res.text();
-  }
-});
+// @ts-expect-error Vite raw import
+import bodyHtml from "../../public/cloned/body.html?raw";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,11 +27,9 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  loader: () => getBodyHtml(),
   component: Index,
 });
 
 function Index() {
-  const html = Route.useLoaderData();
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />;
 }
