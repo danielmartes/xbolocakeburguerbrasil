@@ -34,8 +34,6 @@ export const Route = createFileRoute("/")({
         rel: "preload",
         as: "image",
         href: "/cloned/a41ee0a536b6.webp",
-        // @ts-expect-error fetchpriority is valid HTML
-        fetchpriority: "high",
       },
     ],
   }),
