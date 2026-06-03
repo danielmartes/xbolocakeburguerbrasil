@@ -1,5 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createServerFn } from "@tanstack/react-start";
+
+const getBodyHtml = createServerFn({ method: "GET" }).handler(async () => {
+  const url = new URL("../../public/cloned/body.html", import.meta.url);
+  const { readFile } = await import("node:fs/promises");
+  try {
+    return await readFile(url, "utf-8");
+  } catch {
+    const res = await fetch("/cloned/body.html");
+    return await res.text();
+  }
+});
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,27 +28,22 @@ export const Route = createFileRoute("/")({
           "O doce que faz clientes perguntarem como comprar antes mesmo de saber o preço.",
       },
     ],
-    links: [{ rel: "stylesheet", href: "/cloned/styles.css" }],
+    links: [
+      { rel: "stylesheet", href: "/cloned/styles.css" },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/cloned/a41ee0a536b6.webp",
+        // @ts-expect-error fetchpriority is valid HTML
+        fetchpriority: "high",
+      },
+    ],
   }),
+  loader: () => getBodyHtml(),
   component: Index,
 });
 
 function Index() {
-  const [html, setHtml] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/cloned/body.html")
-      .then((r) => r.text())
-      .then(setHtml);
-  }, []);
-
-  if (!html) {
-    return <div className="min-h-screen bg-background" />;
-  }
-
-  return (
-    <div 
-      dangerouslySetInnerHTML={{ __html: html }} 
-    />
-  );
+  const html = Route.useLoaderData();
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
