@@ -109,6 +109,19 @@
       <div class="mx-auto max-w-5xl">
         <div class="text-center">
           <h2 class="font-display text-3xl leading-tight md:text-5xl">O segredo não é postar mais.<br><span class="text-gradient-primary">É postar algo que faz as pessoas pararem para olhar.</span></h2>
+          <style>
+            @keyframes shimmer {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(100%); }
+            }
+            .animate-pulse-glow {
+              animation: pulse-glow 2s infinite;
+            }
+            @keyframes pulse-glow {
+              0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+              50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            }
+          </style>
         </div>
         <div class="mt-10 grid gap-4 sm:grid-cols-3">
           <img src="https://qtbkvshbmqlszncxlcuc.supabase.co/storage/v1/object/public/dsl-uploads/bQZ16yjmBeOoJMzB8a0h9m0Uelt1/24c3ff4a-f159-453f-9c55-1670106b5f55.png" alt="Variação 1 de Cake Burger" width="1024" height="1024" loading="lazy" decoding="async" class="shadow-soft aspect-square w-full rounded-[2rem] object-cover transition-transform hover:scale-[1.02]">
