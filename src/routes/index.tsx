@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-// @ts-expect-error Vite raw import
 import bodyHtml from "../../public/cloned/body.html?raw";
 
 export const Route = createFileRoute("/")({
