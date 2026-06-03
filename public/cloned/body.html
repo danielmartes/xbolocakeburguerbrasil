@@ -109,6 +109,19 @@
       <div class="mx-auto max-w-5xl">
         <div class="text-center">
           <h2 class="font-display text-3xl leading-tight md:text-5xl">O segredo não é postar mais.<br><span class="text-gradient-primary">É postar algo que faz as pessoas pararem para olhar.</span></h2>
+          <style>
+            @keyframes shimmer {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(100%); }
+            }
+            .animate-pulse-glow {
+              animation: pulse-glow 2s infinite;
+            }
+            @keyframes pulse-glow {
+              0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+              50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            }
+          </style>
         </div>
         <div class="mt-10 grid gap-4 sm:grid-cols-3">
           <img src="https://qtbkvshbmqlszncxlcuc.supabase.co/storage/v1/object/public/dsl-uploads/bQZ16yjmBeOoJMzB8a0h9m0Uelt1/24c3ff4a-f159-453f-9c55-1670106b5f55.png" alt="Variação 1 de Cake Burger" width="1024" height="1024" loading="lazy" decoding="async" class="shadow-soft aspect-square w-full rounded-[2rem] object-cover transition-transform hover:scale-[1.02]">
@@ -154,14 +167,16 @@
           </div>
         </div>
         <div class="mt-10 text-center">
-          <a href="index.html" class="bg-gradient-cta animate-pulse-glow shadow-cta inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.97] md:w-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-4 w-4" aria-hidden="true">
+          <a href="https://ggcheckout.app/checkout/v2/h9pYpyiKkLKTYocBhttr" target="_blank" rel="noopener noreferrer" class="bg-gradient-cta animate-pulse-glow shadow-cta relative overflow-hidden inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-primary-foreground transition-all hover:scale-[1.05] hover:brightness-110 active:scale-[0.97] md:w-auto">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+            <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_70%)]"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-4 w-4 relative z-10" aria-hidden="true">
               <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
               <path d="M20 2v4"></path>
               <path d="M22 4h-4"></path>
               <circle cx="4" cy="20" r="2"></circle>
             </svg>
-            Quero aprender agora
+            <span class="relative z-10">Quero aprender agora</span>
           </a>
         </div>
       </div>
@@ -631,14 +646,15 @@
               <p class="font-display mt-1 text-6xl font-extrabold leading-none md:text-7xl">R$ 15<span class="text-3xl">,90</span></p>
               <p class="mt-2 text-xs opacity-90">Pagamento único • Acesso vitalício</p>
             </div>
-            <a href="https://ggcheckout.app/checkout/v2/h9pYpyiKkLKTYocBhttr" target="_blank" rel="noopener noreferrer" class="bg-background text-primary shadow-soft inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-extrabold uppercase tracking-wider transition-transform hover:scale-[1.02] active:scale-[0.98]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-4 w-4" aria-hidden="true">
+            <a href="https://ggcheckout.app/checkout/v2/h9pYpyiKkLKTYocBhttr" target="_blank" rel="noopener noreferrer" class="bg-background text-primary shadow-soft relative overflow-hidden inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-extrabold uppercase tracking-wider transition-all hover:scale-[1.05] hover:brightness-110 active:scale-[0.98]">
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-4 w-4 relative z-10" aria-hidden="true">
                 <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
                 <path d="M20 2v4"></path>
                 <path d="M22 4h-4"></path>
                 <circle cx="4" cy="20" r="2"></circle>
               </svg>
-              Quero acessar agora
+              <span class="relative z-10">Quero acessar agora</span>
             </a>
             <div class="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs opacity-90">
               <span class="flex items-center gap-1.5">
@@ -736,7 +752,10 @@
         <div class="p-8 md:p-10">
           <h2 class="font-display text-3xl leading-tight md:text-4xl">Pare de perder pedidos para a concorrência.</h2>
           <p class="text-foreground/70 mt-3 text-base">Aprenda agora e torne-se referência na sua cidade.</p>
-          <a href="index.html" class="bg-gradient-cta shadow-cta mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]">Quero acessar o Protocolo Cake Burger</a>
+          <a href="https://ggcheckout.app/checkout/v2/h9pYpyiKkLKTYocBhttr" target="_blank" rel="noopener noreferrer" class="bg-gradient-cta shadow-cta relative overflow-hidden inline-flex w-full items-center justify-center rounded-full px-6 py-4 text-xs font-extrabold uppercase tracking-wider text-primary-foreground transition-all hover:scale-[1.05] hover:brightness-110 active:scale-[0.98]">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+            <span class="relative z-10">Quero acessar o Protocolo Cake Burger</span>
+          </a>
         </div>
       </div>
     </section>
