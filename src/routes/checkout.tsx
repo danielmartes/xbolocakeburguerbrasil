@@ -295,16 +295,16 @@ function Summary({ total, payment }: { total: number; payment: "pix" | "card" })
         </div>
         <span className="text-zinc-100 font-bold text-sm tracking-tight">R$ {PRICE.toFixed(2).replace(".", ",")}</span>
       </div>
-      <div className="border-t border-zinc-800 pt-3 space-y-1.5 text-sm">
-        <div className="flex justify-between text-zinc-300"><span>Subtotal</span><span>R$ {PRICE.toFixed(2).replace(".", ",")}</span></div>
-        <div className="flex justify-between text-emerald-400"><span>Frete</span><span>Grátis</span></div>
+      <div className="border-t border-zinc-800/50 pt-4 space-y-2 text-[11px] font-medium uppercase tracking-wider">
+        <div className="flex justify-between text-zinc-500"><span>Subtotal</span><span className="text-zinc-300 italic">R$ {PRICE.toFixed(2).replace(".", ",")}</span></div>
+        <div className="flex justify-between text-emerald-500/80"><span>Frete</span><span className="font-bold">Grátis</span></div>
         {payment === "pix" && (
-          <div className="flex justify-between text-emerald-400"><span>Desconto PIX (10%)</span><span>- R$ {discount.toFixed(2).replace(".", ",")}</span></div>
+          <div className="flex justify-between text-amber-500/80"><span>Desconto PIX</span><span className="font-bold">- R$ {discount.toFixed(2).replace(".", ",")}</span></div>
         )}
       </div>
-      <div className="border-t border-zinc-800 pt-3 flex items-center justify-between">
-        <span className="text-white font-semibold">Total</span>
-        <span className="text-2xl font-extrabold text-amber-400">R$ {total.toFixed(2).replace(".", ",")}</span>
+      <div className="border-t border-zinc-800 pt-4 flex items-center justify-between">
+        <span className="text-zinc-400 text-xs font-black uppercase tracking-widest">Total</span>
+        <span className="text-3xl font-black text-amber-500 tracking-tighter shadow-amber-500/10 drop-shadow-sm">R$ {total.toFixed(2).replace(".", ",")}</span>
       </div>
     </div>
   );
