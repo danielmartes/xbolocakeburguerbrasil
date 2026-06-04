@@ -24,22 +24,20 @@ Deno.serve(async (req) => {
       throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
     }
 
-    // TENTATIVA 41: Usando o formato v1/action com action: gmail_send_email_v1
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/action", {
+    // Using the unified email sending endpoint for Gmail connector
+    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${GMAIL_API_KEY}`,
       },
       body: JSON.stringify({
-        action: "gmail_send_email_v1",
-        parameters: {
-          to,
-          subject,
-          body: html,
-        }
+        to,
+        subject,
+        body: html,
       }),
     });
+
 
 
 
