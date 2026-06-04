@@ -24,17 +24,22 @@ Deno.serve(async (req) => {
       throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
     }
 
-    // Chamada usando a estrutura de proxy sem o prefixo /proxy
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/gmail/v1/users/me/messages/send", {
+    // Chamada usando a estrutura de proxy mais comum para o gateway do Lovable
+    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/action", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${GMAIL_API_KEY}`,
       },
       body: JSON.stringify({
-        raw: btoa(`To: ${to}\r\nSubject: ${subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n${html}`).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+        action: "gmail.users.messages.send",
+        userId: "me",
+        resource: {
+          raw: btoa(`To: ${to}\r\nSubject: ${subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n${html}`).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+        }
       }),
     });
+
 
 
 
