@@ -137,12 +137,12 @@ function CheckoutPage() {
         <div className="lg:hidden mb-4">
           <button
             onClick={() => setSummaryOpen((s) => !s)}
-            className="w-full bg-zinc-900/70 border border-zinc-700 rounded-xl p-4 flex items-center justify-between"
+            className="w-full bg-zinc-900/40 border border-zinc-800 rounded-xl p-4 flex items-center justify-between hover:bg-zinc-900/60 transition-colors"
           >
-            <span className="flex items-center gap-2 text-sm"><ShoppingBag className="w-4 h-4 text-amber-400" /> Resumo do pedido</span>
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400"><ShoppingBag className="w-4 h-4 text-amber-500" /> Resumo do pedido</span>
             <span className="flex items-center gap-2">
-              <span className="text-amber-400 font-bold">R$ {total.toFixed(2).replace(".", ",")}</span>
-              {summaryOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              <span className="text-amber-500 font-bold">R$ {total.toFixed(2).replace(".", ",")}</span>
+              {summaryOpen ? <ChevronUp className="w-4 h-4 text-zinc-500" /> : <ChevronDown className="w-4 h-4 text-zinc-500" />}
             </span>
           </button>
           {summaryOpen && <div className="mt-2"><Summary total={total} payment={payment} /></div>}
