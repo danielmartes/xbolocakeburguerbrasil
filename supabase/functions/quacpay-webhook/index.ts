@@ -89,6 +89,32 @@ Deno.serve(async (req) => {
 
     console.log(`Order ${externalId} updated to status: ${status}`);
 
+    if (status === "paid") {
+      const { data: order } = await supabase
+        .from("orders")
+        .select("customer_email, customer_name")
+        .eq("external_id", String(externalId))
+        .single();
+
+      if (order?.customer_email) {
+        console.log(`Sending deliverable to ${order.customer_email}`);
+        await supabase.functions.invoke("resend-email", {
+          body: {
+            to: order.customer_email,
+            subject: "Seu material: Protocolo Cake Burger",
+            html: `
+              <h1>Olá, ${order.customer_name}!</h1>
+              <p>Seu pagamento foi aprovado e seu material já está disponível.</p>
+              <p>Acesse agora pelo link abaixo:</p>
+              <p><a href="https://drive.google.com/drive/folders/1fKH0rQT7r8mc-s7p5F7JSQ4C-SzAcYe4?usp=drive_link">Acessar Google Drive</a></p>
+              <br>
+              <p>Bons estudos!</p>
+            `,
+          },
+        });
+      }
+    }
+
     return new Response(JSON.stringify({ received: true, status }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
