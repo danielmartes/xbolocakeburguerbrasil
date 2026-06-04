@@ -275,9 +275,9 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-zinc-300 text-sm">{label}</Label>
+      <Label className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest ml-1">{label}</Label>
       {children}
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      {error && <p className="text-red-500/80 text-[10px] font-semibold italic ml-1">{error}</p>}
     </div>
   );
 }
