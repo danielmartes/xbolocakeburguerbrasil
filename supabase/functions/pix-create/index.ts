@@ -57,7 +57,7 @@ Deno.serve(async (req) => {
 
     // 2. Create Customer (Mandatory for /api/v1/customers according to standard REST patterns and QuacPay requirements)
     console.log("Creating QuacPay customer...");
-    const customerRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/customers`, {
+    const customerRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/create-customer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
