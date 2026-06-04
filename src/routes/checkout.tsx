@@ -110,14 +110,15 @@ function CheckoutPage() {
     }
   };
 
-  const inputCls = "bg-zinc-900/60 border-zinc-700 text-white placeholder:text-zinc-500 focus-visible:ring-amber-400";
+  const inputCls = "bg-zinc-900/40 border-zinc-800 text-white placeholder:text-zinc-500 focus-visible:ring-amber-500 focus-visible:border-amber-500/50";
   const errCls = (k: string) => errors[k] ? "border-red-500" : "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-white">
-      <div className="bg-emerald-600/10 border-b border-emerald-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 text-emerald-400 text-sm font-medium">
-          <Lock className="w-4 h-4" /> Ambiente 100% Seguro e Criptografado
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-amber-500/30">
+      {/* Header Segura */}
+      <div className="bg-emerald-500/5 border-b border-emerald-500/10">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 text-emerald-500/80 text-[10px] sm:text-xs font-medium tracking-wide uppercase">
+          <Lock className="w-3 h-3" /> Ambiente 100% Seguro e Criptografado
         </div>
       </div>
 
