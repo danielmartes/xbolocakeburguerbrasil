@@ -11,6 +11,7 @@ interface PixRequest {
   name: string;
   email: string;
   phone: string;
+  cpf: string;
   amount: number;
   productName: string;
 }
@@ -21,7 +22,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { name, email, phone, amount, productName } = (await req.json()) as PixRequest;
+    const { name, email, phone, cpf, amount, productName } = (await req.json()) as PixRequest;
+    const cpfDigits = (cpf || "").replace(/\D/g, "");
+    const phoneDigits = (phone || "").replace(/\D/g, "");
+    if (cpfDigits.length < 11) throw new Error("CPF inválido");
+    if (phoneDigits.length < 10) throw new Error("Telefone inválido");
 
     const clientId = Deno.env.get("QUACPAY_CLIENT_ID");
     const clientSecret = Deno.env.get("QUACPAY_CLIENT_SECRET");
@@ -61,7 +66,8 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         name,
         email,
-        phone: phone.replace(/\D/g, ""),
+        cpfCnpj: cpfDigits,
+        mobilePhone: phoneDigits,
       }),
     });
 
@@ -116,7 +122,7 @@ Deno.serve(async (req) => {
         external_id: externalId ? String(externalId) : null,
         customer_name: name,
         customer_email: email,
-        customer_phone: phone.replace(/\D/g, ""),
+        customer_phone: phoneDigits,
         product_name: productName,
         amount,
         status: "pending",
