@@ -206,8 +206,8 @@ function CheckoutPage() {
               </RadioGroup>
 
               {payment === "pix" && (
-                <div className="mt-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-3 text-sm text-emerald-200">
-                  Pague com PIX e ganhe <b>10% de desconto</b>. Total: <b>R$ {total.toFixed(2).replace(".", ",")}</b>. O QR Code será gerado após confirmar o pedido.
+                <div className="mt-4 rounded-lg bg-emerald-500/5 border border-emerald-500/10 p-4 text-[11px] leading-relaxed text-emerald-500/80">
+                  Pague com PIX e ganhe <b className="text-emerald-400">10% de desconto</b>. Total: <b className="text-emerald-400">R$ {total.toFixed(2).replace(".", ",")}</b>. O QR Code será gerado após confirmar o pedido.
                 </div>
               )}
 
