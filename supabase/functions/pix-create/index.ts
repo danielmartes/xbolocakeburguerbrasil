@@ -87,8 +87,7 @@ Deno.serve(async (req) => {
     }
 
     // 3. Create PIX Charge
-    console.log("Creating PIX charge...");
-    const webhookUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/quacpay-webhook`;
+    console.log("Creating PIX charge...", { customerId, value: amount });
     const pixRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/charges/pix`, {
       method: "POST",
       headers: {
@@ -98,16 +97,18 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         value: Number(amount.toFixed(2)), // Valor em reais
         customerId,
-        externalReference: productName,
-        webhook_url: webhookUrl,
+        productName,
+        externalReference: `ORD-${Date.now()}`,
       }),
     });
 
     const pixData = await pixRes.json();
 
-    if (!pixRes.ok) {
+    if (!pixRes.ok || pixData.success === false) {
       console.error("Pix charge error:", pixData);
-      throw new Error(pixData.message || pixData.error || "Failed to create PIX charge");
+      throw new Error(
+        `${pixData.message || pixData.error || "Failed to create PIX charge"}${pixData.code ? ` (${pixData.code})` : ""}${pixData.request_id ? ` [${pixData.request_id}]` : ""}`
+      );
     }
 
     // Persist order so the webhook can update its status
@@ -118,7 +119,7 @@ Deno.serve(async (req) => {
         { auth: { autoRefreshToken: false, persistSession: false } }
       );
       const externalId =
-        pixData.id || pixData.charge_id || pixData.transaction_id || pixData.data?.id;
+        pixData.chargeId || pixData.id || pixData.charge_id || pixData.transaction_id || pixData.data?.id;
       const pix = pixData.pix || pixData.data?.pix || {};
       await supabase.from("orders").insert({
         external_id: externalId ? String(externalId) : null,
@@ -129,8 +130,8 @@ Deno.serve(async (req) => {
         amount,
         status: "pending",
         payment_method: "pix",
-        pix_payload: pix.payload || pix.qrcode || pix.copy_paste || null,
-        pix_qrcode: pix.qrcode_image || pix.qr_code || null,
+        pix_payload: pixData.qrCodePayload || pix.payload || pix.qrcode || pix.copy_paste || null,
+        pix_qrcode: pixData.qrCode || pix.qrcode_image || pix.qr_code || null,
         raw_response: pixData,
       });
     } catch (e) {
