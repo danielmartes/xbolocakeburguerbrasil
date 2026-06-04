@@ -101,14 +101,23 @@ Deno.serve(async (req) => {
         await supabase.functions.invoke("gmail-email", {
           body: {
             to: order.customer_email,
-            subject: "Seu material: Protocolo Cake Burger",
+            subject: "🍰 Seu acesso: Protocolo Cake Burger",
+            customerName: order.customer_name,
             html: `
-              <h1>Olá, ${order.customer_name}!</h1>
-              <p>Seu pagamento foi aprovado e seu material já está disponível.</p>
-              <p>Acesse agora pelo link abaixo:</p>
-              <p><a href="https://drive.google.com/drive/folders/1fKH0rQT7r8mc-s7p5F7JSQ4C-SzAcYe4?usp=drive_link">Acessar Google Drive</a></p>
-              <br>
-              <p>Bons estudos!</p>
+              <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                <h2 style="color: #333;">Olá, ${order.customer_name}! 🍰</h2>
+                <p style="font-size: 16px; color: #555;">Muito obrigado pela sua compra do <strong>Protocolo Cake Burger</strong>!</p>
+                <p style="font-size: 16px; color: #555;">Estamos muito felizes em ter você conosco. Seu acesso ao material já está liberado:</p>
+                <div style="text-align: center; margin: 30px 0;">
+                  <a href="https://drive.google.com/drive/folders/1fKH0rQT7r8mc-s7p5F7JSQ4C-SzAcYe4?usp=drive_link" 
+                     style="background-color: #ff9900; color: white; padding: 15px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 18px;">
+                    ACESSAR MATERIAL AGORA
+                  </a>
+                </div>
+                <p style="font-size: 14px; color: #888;">Se tiver qualquer dúvida, basta responder a este e-mail.</p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                <p style="font-size: 12px; color: #aaa; text-align: center;">Equipe Cake Burger</p>
+              </div>
             `,
           },
         });
