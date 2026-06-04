@@ -2,3 +2,6 @@ project_id = "pdezxylrhdfaznahhisz"
 
 [functions.quacpay-webhook]
 verify_jwt = false
+
+[functions.resend-email]
+verify_jwt = false
