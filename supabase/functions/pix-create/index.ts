@@ -50,31 +50,48 @@ Deno.serve(async (req) => {
 
     const { access_token } = await tokenRes.json();
 
-    // 2. Create Customer (Optional but recommended by docs)
-    // Note: Documentation says Quickstart: token -> create-customer -> cobrança Pix
-    // We'll skip for now if the pix endpoint allows inline customer data or if we can map fields directly
-    // Let's assume a "create charge" endpoint under /api/v1/pix/charges (common pattern)
-    // Since the doc provided is high level, I'll implement a robust structure that can be adjusted.
-    
-    console.log("Creating PIX charge...");
-    const webhookUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/quacpay-webhook`;
-    const pixRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/pix/charges`, {
+    // 2. Create Customer (Mandatory for /api/v1/charges/pix according to Quickstart)
+    console.log("Creating QuacPay customer...");
+    const customerRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/create-customer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${access_token}`,
       },
       body: JSON.stringify({
-        amount: Math.round(amount * 100), // Amount in cents usually
-        customer: {
-          name,
-          email,
-          phone: phone.replace(/\D/g, ""),
-        },
+        name,
+        email,
+        phone: phone.replace(/\D/g, ""),
+      }),
+    });
+
+    if (!customerRes.ok) {
+      const customerError = await customerRes.text();
+      console.error("Customer creation error:", customerError);
+      throw new Error(`Failed to create QuacPay customer: ${customerError}`);
+    }
+
+    const customerData = await customerRes.json();
+    const customerId = customerData.id || customerData.data?.id;
+
+    if (!customerId) {
+      throw new Error("Customer ID not returned by QuacPay");
+    }
+
+    // 3. Create PIX Charge
+    console.log("Creating PIX charge...");
+    const webhookUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/quacpay-webhook`;
+    const pixRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/charges/pix`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${access_token}`,
+      },
+      body: JSON.stringify({
+        amount: Math.round(amount * 100), // Amount in cents
+        customerId,
         description: productName,
-        payment_method: "pix",
         webhook_url: webhookUrl,
-        postback_url: webhookUrl,
       }),
     });
 
@@ -82,7 +99,7 @@ Deno.serve(async (req) => {
 
     if (!pixRes.ok) {
       console.error("Pix charge error:", pixData);
-      throw new Error(pixData.message || "Failed to create PIX charge");
+      throw new Error(pixData.message || pixData.error || "Failed to create PIX charge");
     }
 
     // Persist order so the webhook can update its status
