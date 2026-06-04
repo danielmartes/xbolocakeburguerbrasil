@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Lock, ShoppingBag, ChevronDown, ChevronUp, Loader2, QrCode, ShieldCheck, Sparkles, Clock, Video, Smartphone } from "lucide-react";
+import { Lock, ShoppingBag, ChevronDown, ChevronUp, Loader2, QrCode, ShieldCheck, Sparkles, Clock, Video, Smartphone, Zap, Check, Award } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
@@ -129,19 +129,37 @@ function CheckoutPage() {
               <p className="text-xs text-muted-foreground">📩 O acesso será enviado ao seu e-mail e WhatsApp logo após o pagamento.</p>
             </Card>
 
-            <Card title="Forma de pagamento">
-              <div className="relative rounded-2xl border-2 border-primary bg-primary/5 p-5 flex items-center gap-4">
-                <div className="bg-primary/10 p-3 rounded-xl">
-                  <QrCode className="w-7 h-7 text-primary" />
+            <Card title="Forma de Pagamento" step={2}>
+              <div className="rounded-2xl border-2 border-primary/30 bg-card p-5 shadow-card">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-xl shrink-0">
+                    <QrCode className="w-7 h-7 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-extrabold text-lg leading-none">PIX</p>
+                    <p className="text-xs text-muted-foreground mt-1">Pagamento instantâneo</p>
+                    <div className="mt-3 inline-flex items-center gap-1.5 bg-gradient-cta text-primary-foreground text-xs font-extrabold px-3 py-1.5 rounded-full shadow-cta uppercase tracking-wider">
+                      <Zap className="w-3.5 h-3.5" /> 10% de desconto
+                    </div>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <p className="font-extrabold text-base">PIX</p>
-                  <p className="text-xs text-muted-foreground">Aprovação imediata após o pagamento</p>
+
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                  <div>
+                    <p className="text-sm text-muted-foreground line-through">De R$ {PRICE.toFixed(2).replace(".", ",")}</p>
+                    <p className="text-4xl font-extrabold text-gradient-primary leading-none mt-1">R$ {total.toFixed(2).replace(".", ",")}</p>
+                  </div>
+                  <ul className="text-sm space-y-1.5">
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> Acesso imediato</li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> QR Code gerado na confirmação</li>
+                  </ul>
                 </div>
-                <span className="absolute -top-2.5 -right-2 bg-gradient-cta text-primary-foreground text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-cta uppercase tracking-wider">10% OFF</span>
               </div>
-              <div className="mt-4 rounded-xl bg-accent/10 border border-accent/30 p-4 text-sm leading-relaxed">
-                Pague com PIX e ganhe <b className="text-primary">10% de desconto</b>. Total: <b className="text-primary">R$ {total.toFixed(2).replace(".", ",")}</b>. O QR Code será gerado após confirmar o pedido.
+
+              <div className="grid grid-cols-3 gap-3 mt-4">
+                <TrustBadge icon={<Lock className="w-4 h-4 text-primary" />} label="Compra segura" />
+                <TrustBadge icon={<ShieldCheck className="w-4 h-4 text-primary" />} label="Dados protegidos" />
+                <TrustBadge icon={<Award className="w-4 h-4 text-primary" />} label="Garantia 7 dias" />
               </div>
             </Card>
           </div>
@@ -152,12 +170,12 @@ function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="cta-offer-button mt-4 w-full bg-gradient-cta hover:opacity-95 disabled:opacity-70 text-primary-foreground font-extrabold py-4 rounded-full flex items-center justify-center gap-2 transition shadow-cta text-base uppercase tracking-wider"
+                className="cta-offer-button mt-4 w-full bg-gradient-cta hover:opacity-95 disabled:opacity-70 text-primary-foreground font-extrabold py-5 rounded-full flex items-center justify-center gap-2 transition shadow-cta text-base uppercase tracking-wider"
               >
-                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Quero acessar agora</>}
+                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><Lock className="w-5 h-5" /> Confirmar pedido · R$ {total.toFixed(2).replace(".", ",")}</>}
               </button>
-              <p className="text-center text-xs text-muted-foreground mt-3 flex items-center justify-center gap-1.5">
-                <Lock className="w-3 h-3" /> Pagamento processado com segurança
+              <p className="text-center text-xs text-muted-foreground mt-3 px-2">
+                Ao confirmar, você concorda com os termos. Garantia de 7 dias — sem perguntas.
               </p>
             </div>
           </aside>
@@ -166,12 +184,12 @@ function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="cta-offer-button w-full bg-gradient-cta hover:opacity-95 disabled:opacity-70 text-primary-foreground font-extrabold py-4 rounded-full flex items-center justify-center gap-2 transition shadow-cta text-base uppercase tracking-wider"
+              className="cta-offer-button w-full bg-gradient-cta hover:opacity-95 disabled:opacity-70 text-primary-foreground font-extrabold py-5 rounded-full flex items-center justify-center gap-2 transition shadow-cta text-base uppercase tracking-wider"
             >
-              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Quero acessar agora</>}
+              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><Lock className="w-5 h-5" /> Confirmar pedido · R$ {total.toFixed(2).replace(".", ",")}</>}
             </button>
-            <p className="text-center text-xs text-muted-foreground mt-3 flex items-center justify-center gap-1.5">
-              <Lock className="w-3 h-3" /> Pagamento processado com segurança
+            <p className="text-center text-xs text-muted-foreground mt-3 px-2">
+              Ao confirmar, você concorda com os termos. Garantia de 7 dias — sem perguntas.
             </p>
           </div>
         </form>
@@ -188,11 +206,25 @@ function Badge({ icon, children }: { icon: React.ReactNode; children: React.Reac
   );
 }
 
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
+function Card({ title, children, step }: { title: string; children: React.ReactNode; step?: number }) {
   return (
     <div className="rounded-2xl border-2 border-border bg-card shadow-card p-5 sm:p-6 space-y-4">
-      <h2 className="font-display text-xl font-extrabold tracking-tight">{title}</h2>
+      <h2 className="font-display text-xl font-extrabold tracking-tight flex items-center gap-2.5">
+        {step != null && (
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-extrabold shrink-0">{step}</span>
+        )}
+        {title}
+      </h2>
       {children}
+    </div>
+  );
+}
+
+function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="bg-card border-2 border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1.5 text-center shadow-card">
+      {icon}
+      <span className="text-xs font-semibold">{label}</span>
     </div>
   );
 }
