@@ -46,18 +46,24 @@ serve(async (req) => {
       </div>
     `;
 
-    // Construct RFC 2822 message
+    // Construct RFC 2822 message with proper UTF-8 subject encoding
+    // Format: Subject: =?utf-8?B?<base64_subject>?=
+    const encoder = new TextEncoder();
+    const subjectData = encoder.encode(subject);
+    const subjectBase64 = btoa(String.fromCharCode(...subjectData));
+    const encodedSubject = `=?utf-8?B?${subjectBase64}?=`;
+
     const emailContent = [
       `To: ${to}`,
-      `Subject: ${subject}`,
+      `Subject: ${encodedSubject}`,
       `Content-Type: text/html; charset=utf-8`,
       `MIME-Version: 1.0`,
       "",
       finalHtml,
     ].join("\r\n");
 
-    const encoder = new TextEncoder();
     const data = encoder.encode(emailContent);
+
     const binary = String.fromCharCode(...data);
     const base64url = btoa(binary)
       .replace(/\+/g, "-")
