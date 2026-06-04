@@ -28,8 +28,8 @@ Deno.serve(async (req) => {
     if (cpfDigits.length < 11) throw new Error("CPF inválido");
     if (phoneDigits.length < 10) throw new Error("Telefone inválido");
 
-    const clientId = Deno.env.get("QUACPAY_CLIENT_ID");
-    const clientSecret = Deno.env.get("QUACPAY_CLIENT_SECRET");
+    const clientId = Deno.env.get("QUACPAY_CLIENT_ID") || "qpc_production_bd2758c1f0f8e931";
+    const clientSecret = Deno.env.get("QUACPAY_CLIENT_SECRET") || "qps_375fd233742614eecef75327f34962a9de7925bc033c276e";
 
     if (!clientId || !clientSecret) {
       throw new Error("QuacPay credentials not configured");
