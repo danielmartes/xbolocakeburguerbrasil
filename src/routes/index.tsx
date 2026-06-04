@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import bodyHtml from "../../public/cloned/body.html?raw";
 
 export const Route = createFileRoute("/")({
@@ -30,5 +31,27 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Intercept clicks on elements with the specific text
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const closestButton = target.closest(".cta-offer-button, .cta-button, button, a");
+      
+      if (closestButton) {
+        const text = closestButton.textContent?.toLowerCase() || "";
+        if (text.includes("quero acessar agora") || text.includes("quero acessar o protocolo cake burger")) {
+          e.preventDefault();
+          e.stopPropagation();
+          navigate({ to: "/checkout" });
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClick, true);
+    return () => document.removeEventListener("click", handleClick, true);
+  }, [navigate]);
+
   return <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />;
 }
