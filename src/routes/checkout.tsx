@@ -157,8 +157,8 @@ function CheckoutPage() {
                     <p className="text-4xl font-extrabold text-gradient-primary leading-none mt-1">R$ {total.toFixed(2).replace(".", ",")}</p>
                   </div>
                   <ul className="text-sm space-y-1.5">
-                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> Acesso imediato</li>
-                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> QR Code gerado na confirmação</li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> Acesso imediato via Google Drive</li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary shrink-0" /> QR Code gerado na hora</li>
                   </ul>
                 </div>
               </div>
