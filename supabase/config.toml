@@ -1,1 +1,4 @@
 project_id = "pdezxylrhdfaznahhisz"
+
+[functions.quacpay-webhook]
+verify_jwt = false
