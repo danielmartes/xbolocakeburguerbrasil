@@ -28,25 +28,6 @@ const maskPhone = (v: string) => {
   return d.replace(/(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
 };
 
-const maskCpf = (v: string) => {
-  const d = v.replace(/\D/g, "").slice(0, 11);
-  return d.replace(/(\d{3})(\d{0,3})(\d{0,3})(\d{0,2}).*/, (_, a, b, c, e) =>
-    [a, b && `.${b}`, c && `.${c}`, e && `-${e}`].filter(Boolean).join("")
-  );
-};
-
-const isValidCpf = (v: string) => {
-  const d = v.replace(/\D/g, "");
-  if (d.length !== 11 || /^(\d)\1+$/.test(d)) return false;
-  let s = 0;
-  for (let i = 0; i < 9; i++) s += parseInt(d[i]) * (10 - i);
-  let r = (s * 10) % 11; if (r === 10) r = 0;
-  if (r !== parseInt(d[9])) return false;
-  s = 0;
-  for (let i = 0; i < 10; i++) s += parseInt(d[i]) * (11 - i);
-  r = (s * 10) % 11; if (r === 10) r = 0;
-  return r === parseInt(d[10]);
-};
 
 function CheckoutPage() {
   const navigate = useNavigate();
@@ -69,7 +50,7 @@ function CheckoutPage() {
     if (buyer.name.trim().length < 3) e.name = "Informe seu nome completo";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyer.email)) e.email = "E-mail inválido";
     if (buyer.phone.replace(/\D/g, "").length < 10) e.phone = "Telefone inválido";
-    if (!isValidCpf(buyer.cpf)) e.cpf = "CPF inválido";
+    
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -148,9 +129,6 @@ function CheckoutPage() {
               </Field>
               <Field label="E-mail" error={errors.email}>
                 <Input type="email" className={`${inputCls} ${errCls("email")}`} value={buyer.email} onChange={(e) => setBuyer({ ...buyer, email: e.target.value })} placeholder="voce@email.com" />
-              </Field>
-              <Field label="CPF" error={errors.cpf}>
-                <Input inputMode="numeric" className={`${inputCls} ${errCls("cpf")}`} value={buyer.cpf} onChange={(e) => setBuyer({ ...buyer, cpf: maskCpf(e.target.value) })} placeholder="000.000.000-00" />
               </Field>
               <Field label="Telefone (WhatsApp)" error={errors.phone}>
                 <Input className={`${inputCls} ${errCls("phone")}`} value={buyer.phone} onChange={(e) => setBuyer({ ...buyer, phone: maskPhone(e.target.value) })} placeholder="(00) 00000-0000" />

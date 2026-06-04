@@ -25,7 +25,8 @@ Deno.serve(async (req) => {
     const { name, email, phone, cpf, amount, productName } = (await req.json()) as PixRequest;
     const cpfDigits = (cpf || "").replace(/\D/g, "");
     const phoneDigits = (phone || "").replace(/\D/g, "");
-    if (cpfDigits.length < 11) throw new Error("CPF inválido");
+    // CPF is now optional in the UI, but we'll try to use it if provided
+    if (phoneDigits.length < 10) throw new Error("Telefone inválido");
     if (phoneDigits.length < 10) throw new Error("Telefone inválido");
 
     const clientId = Deno.env.get("QUACPAY_CLIENT_ID") || "qpc_production_bd2758c1f0f8e931";
@@ -66,7 +67,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         name,
         email,
-        cpfCnpj: cpfDigits,
+        cpfCnpj: cpfDigits || "00000000000", // Fallback if CPF is not provided
         phone: phoneDigits,
         mobilePhone: phoneDigits,
       }),
