@@ -57,6 +57,7 @@ Deno.serve(async (req) => {
     // Since the doc provided is high level, I'll implement a robust structure that can be adjusted.
     
     console.log("Creating PIX charge...");
+    const webhookUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/quacpay-webhook`;
     const pixRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/pix/charges`, {
       method: "POST",
       headers: {
@@ -72,6 +73,8 @@ Deno.serve(async (req) => {
         },
         description: productName,
         payment_method: "pix",
+        webhook_url: webhookUrl,
+        postback_url: webhookUrl,
       }),
     });
 
@@ -80,6 +83,33 @@ Deno.serve(async (req) => {
     if (!pixRes.ok) {
       console.error("Pix charge error:", pixData);
       throw new Error(pixData.message || "Failed to create PIX charge");
+    }
+
+    // Persist order so the webhook can update its status
+    try {
+      const supabase = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+        { auth: { autoRefreshToken: false, persistSession: false } }
+      );
+      const externalId =
+        pixData.id || pixData.charge_id || pixData.transaction_id || pixData.data?.id;
+      const pix = pixData.pix || pixData.data?.pix || {};
+      await supabase.from("orders").insert({
+        external_id: externalId ? String(externalId) : null,
+        customer_name: name,
+        customer_email: email,
+        customer_phone: phone.replace(/\D/g, ""),
+        product_name: productName,
+        amount,
+        status: "pending",
+        payment_method: "pix",
+        pix_payload: pix.payload || pix.qrcode || pix.copy_paste || null,
+        pix_qrcode: pix.qrcode_image || pix.qr_code || null,
+        raw_response: pixData,
+      });
+    } catch (e) {
+      console.error("Failed to persist order:", e);
     }
 
     return new Response(JSON.stringify(pixData), {
