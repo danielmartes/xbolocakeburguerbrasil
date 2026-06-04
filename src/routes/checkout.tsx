@@ -62,15 +62,19 @@ function CheckoutPage() {
     setLoading(true);
     localStorage.setItem("checkout_buyer", JSON.stringify(buyer));
     try {
-      const res = await fetch("/api/pix/create", {
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/pix-create`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+        },
         body: JSON.stringify({
           name: buyer.name, email: buyer.email, phone: buyer.phone,
           amount: total, productName: "Protocolo Cake Burger",
         }),
       }).catch(() => null);
       const data = res && res.ok ? await res.json().catch(() => null) : null;
+      if (!data || data.error) throw new Error(data?.error || "Erro ao gerar PIX");
       sessionStorage.setItem("pix_result", JSON.stringify(data ?? { amount: total }));
       navigate({ to: "/sucesso", search: { payment: "pix" } as any });
     } finally {
