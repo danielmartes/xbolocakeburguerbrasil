@@ -98,7 +98,7 @@ Deno.serve(async (req) => {
 
       if (order?.customer_email) {
         console.log(`Sending deliverable to ${order.customer_email}`);
-        await supabase.functions.invoke("resend-email", {
+        await supabase.functions.invoke("gmail-email", {
           body: {
             to: order.customer_email,
             subject: "Seu material: Protocolo Cake Burger",
