@@ -96,9 +96,9 @@ Deno.serve(async (req) => {
         "Authorization": `Bearer ${access_token}`,
       },
       body: JSON.stringify({
-        amount: Math.round(amount * 100), // Amount in cents
+        value: Number(amount.toFixed(2)), // Valor em reais
         customerId,
-        description: productName,
+        externalReference: productName,
         webhook_url: webhookUrl,
       }),
     });
