@@ -55,13 +55,11 @@ function SuccessPage() {
   const checkStatus = async (chargeId: string) => {
     try {
       setChecking(true);
-      const { data, error } = await supabase
-        .from("orders")
-        .select("status")
-        .eq("external_id", chargeId)
-        .single();
-      
-      if (data && data.status === "paid") {
+      const { data } = await supabase.rpc("get_order_status", {
+        p_external_id: chargeId,
+      });
+
+      if (data === "paid") {
         setStatus("paid");
         toast.success("Pagamento confirmado! Seu acesso foi liberado.");
       }
