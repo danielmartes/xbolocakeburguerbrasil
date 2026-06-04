@@ -288,12 +288,12 @@ function Summary({ total, payment }: { total: number; payment: "pix" | "card" })
     <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/30 backdrop-blur-md p-6 space-y-5">
       <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 flex items-center gap-2"><ShoppingBag className="w-3.5 h-3.5 text-amber-500" /> Resumo do pedido</h3>
       <div className="flex gap-3 items-center">
-        <img src="/cloned/a41ee0a536b6.webp" alt="Protocolo Cake Burger" className="w-16 h-16 rounded-lg object-cover border border-zinc-700" />
-        <div className="flex-1">
-          <p className="font-semibold text-white text-sm">Protocolo Cake Burger</p>
-          <p className="text-zinc-400 text-xs">Quantidade: 1</p>
+        <img src="/cloned/a41ee0a536b6.webp" alt="Protocolo Cake Burger" className="w-14 h-14 rounded-xl object-cover border border-zinc-800 shadow-lg shadow-black/40" />
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-zinc-100 text-sm truncate">Protocolo Cake Burger</p>
+          <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-tighter">Quantidade: 1</p>
         </div>
-        <span className="text-white font-semibold text-sm">R$ {PRICE.toFixed(2).replace(".", ",")}</span>
+        <span className="text-zinc-100 font-bold text-sm tracking-tight">R$ {PRICE.toFixed(2).replace(".", ",")}</span>
       </div>
       <div className="border-t border-zinc-800 pt-3 space-y-1.5 text-sm">
         <div className="flex justify-between text-zinc-300"><span>Subtotal</span><span>R$ {PRICE.toFixed(2).replace(".", ",")}</span></div>
