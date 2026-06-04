@@ -252,9 +252,9 @@ function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-70 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-500/20"
+              className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-70 text-black font-black text-sm uppercase tracking-widest py-5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
             >
-              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Confirmar Pedido</>}
+              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Finalizar Pedido</>}
             </button>
           </div>
         </form>
