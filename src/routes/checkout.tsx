@@ -123,12 +123,12 @@ function CheckoutPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-center gap-2 sm:gap-6 mb-6">
-          {["Seus Dados", "Endereço", "Pagamento"].map((label, i) => (
-            <div key={label} className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-emerald-500 text-black font-bold flex items-center justify-center text-sm">{i + 1}</div>
-              <span className="text-xs sm:text-sm text-zinc-300">{label}</span>
-              {i < 2 && <div className="w-6 sm:w-12 h-px bg-zinc-700" />}
+        <div className="flex items-center justify-center gap-2 sm:gap-8 mb-8">
+          {["Dados", "Endereço", "Pagamento"].map((label, i) => (
+            <div key={label} className="flex items-center gap-2 group">
+              <div className="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-[10px] shadow-lg shadow-amber-500/20">{i + 1}</div>
+              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-400 group-hover:text-zinc-200 transition-colors">{label}</span>
+              {i < 2 && <div className="w-4 sm:w-10 h-px bg-zinc-800" />}
             </div>
           ))}
         </div>
