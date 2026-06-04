@@ -16,90 +16,40 @@ Deno.serve(async (req) => {
 
   try {
     const { to, subject, html } = (await req.json()) as EmailRequest;
-    console.log(`[resend-email] Enviando via Gmail para: ${to}`);
+    console.log(`[resend-email] Enviando via Resend para: ${to}`);
 
-    const GMAIL_API_KEY = Deno.env.get("GOOGLE_MAIL_API_KEY");
+    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     
-    if (!GMAIL_API_KEY) {
-      throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
+    if (!RESEND_API_KEY) {
+      throw new Error("RESEND_API_KEY não configurada nas variáveis de ambiente.");
     }
 
-    // Tentando o endpoint proxy para a API REST do Gmail
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/proxy/gmail/v1/users/me/messages/send", {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${GMAIL_API_KEY}`,
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        raw: btoa(`To: ${to}\r\nSubject: ${subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n${html}`).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+        from: "Cake Burger <onboarding@resend.dev>", // Note: Replace with your verified domain for production
+        to,
+        subject,
+        html,
       }),
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const resultText = await response.text();
-    let result;
-    try {
-      result = JSON.parse(resultText);
-    } catch {
-      result = { message: resultText };
-    }
+    const result = await response.json();
 
     if (!response.ok) {
-      console.error("[resend-email] Erro no Gateway:", result);
-      throw new Error(`Erro ao enviar e-mail: ${JSON.stringify(result)}`);
+      console.error("[resend-email] Erro no Resend:", result);
+      throw new Error(`Erro ao enviar e-mail via Resend: ${JSON.stringify(result)}`);
     }
 
-    console.log("[resend-email] E-mail enviado com sucesso:", result);
-
+    console.log("[resend-email] E-mail enviado com sucesso via Resend:", result);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      message: "E-mail enviado com sucesso",
+      message: "E-mail enviado com sucesso via Resend",
       recipient: to,
       result
     }), {
@@ -117,5 +67,6 @@ Deno.serve(async (req) => {
     });
   }
 });
+
 
 
