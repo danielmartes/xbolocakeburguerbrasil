@@ -67,6 +67,7 @@ Deno.serve(async (req) => {
         name,
         email,
         cpfCnpj: cpfDigits,
+        phone: phoneDigits,
         mobilePhone: phoneDigits,
       }),
     });
