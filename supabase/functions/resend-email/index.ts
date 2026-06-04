@@ -41,7 +41,13 @@ Deno.serve(async (req) => {
       }),
     });
 
-    const result = await response.json();
+    const resultText = await response.text();
+    let result;
+    try {
+      result = JSON.parse(resultText);
+    } catch {
+      result = { message: resultText };
+    }
 
     if (!response.ok) {
       console.error("[resend-email] Erro no Gateway:", result);
@@ -49,6 +55,7 @@ Deno.serve(async (req) => {
     }
 
     console.log("[resend-email] E-mail enviado com sucesso:", result);
+
 
     return new Response(JSON.stringify({ 
       success: true, 
