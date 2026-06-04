@@ -25,19 +25,23 @@ Deno.serve(async (req) => {
     }
 
     // Chamada direta para a API do conector Gmail via Lovable Gateway
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/action/send", {
+    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/action", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${GMAIL_API_KEY}`,
       },
       body: JSON.stringify({
-        to,
-        subject,
-        body: html,
-        is_html: true
+        action: "gmail.users.messages.send",
+        parameters: {
+          userId: "me",
+          resource: {
+            raw: btoa(`To: ${to}\r\nSubject: ${subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n${html}`).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+          }
+        }
       }),
     });
+
 
 
 
