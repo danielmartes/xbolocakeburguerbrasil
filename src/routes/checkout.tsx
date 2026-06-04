@@ -238,11 +238,13 @@ function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-70 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-500/20"
+                className="mt-4 w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-70 text-black font-black text-sm uppercase tracking-widest py-5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
               >
-                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Confirmar Pedido</>}
+                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Finalizar Pedido</>}
               </button>
-              <p className="text-center text-xs text-zinc-500 mt-3 flex items-center justify-center gap-1"><Lock className="w-3 h-3" /> Pagamento processado com segurança</p>
+              <p className="text-center text-[10px] uppercase tracking-widest font-bold text-zinc-600 mt-4 flex items-center justify-center gap-2 italic">
+                <Lock className="w-3 h-3 text-emerald-500/50" /> Pagamento 100% Seguro
+              </p>
             </div>
           </aside>
 
