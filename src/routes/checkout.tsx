@@ -192,16 +192,16 @@ function CheckoutPage() {
             {/* Card 3 */}
             <Card title="Forma de pagamento">
               <RadioGroup value={payment} onValueChange={(v) => setPayment(v as "pix" | "card")} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label className={`relative cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${payment === "pix" ? "border-amber-400 bg-amber-400/10" : "border-zinc-700 bg-zinc-900/40"}`}>
-                  <RadioGroupItem value="pix" className="border-amber-400 text-amber-400" />
-                  <QrCode className="w-5 h-5 text-amber-400" />
-                  <span className="font-semibold">PIX</span>
-                  <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full">10% OFF</span>
+                <label className={`relative cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition-all duration-300 ${payment === "pix" ? "border-amber-500 bg-amber-500/5 shadow-[0_0_20px_rgba(245,158,11,0.05)]" : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"}`}>
+                  <RadioGroupItem value="pix" className="border-zinc-700 text-amber-500" />
+                  <QrCode className="w-5 h-5 text-amber-500" />
+                  <span className="font-bold text-sm tracking-tight">PIX</span>
+                  <span className="absolute -top-2.5 -right-2 bg-amber-500 text-black text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg shadow-amber-500/20 uppercase tracking-tighter">10% OFF</span>
                 </label>
-                <label className={`cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${payment === "card" ? "border-amber-400 bg-amber-400/10" : "border-zinc-700 bg-zinc-900/40"}`}>
-                  <RadioGroupItem value="card" className="border-amber-400 text-amber-400" />
-                  <CreditCard className="w-5 h-5 text-amber-400" />
-                  <span className="font-semibold">Cartão de Crédito</span>
+                <label className={`cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition-all duration-300 ${payment === "card" ? "border-amber-500 bg-amber-500/5 shadow-[0_0_20px_rgba(245,158,11,0.05)]" : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"}`}>
+                  <RadioGroupItem value="card" className="border-zinc-700 text-amber-500" />
+                  <CreditCard className="w-5 h-5 text-amber-500" />
+                  <span className="font-bold text-sm tracking-tight">Cartão de Crédito</span>
                 </label>
               </RadioGroup>
 
