@@ -32,15 +32,15 @@ Deno.serve(async (req) => {
         "Authorization": `Bearer ${GMAIL_API_KEY}`,
       },
       body: JSON.stringify({
-        action: "gmail.users.messages.send",
+        action: "send",
         parameters: {
-          userId: "me",
-          resource: {
-            raw: btoa(`To: ${to}\r\nSubject: ${subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n${html}`).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
-          }
+          to,
+          subject,
+          body: html,
         }
       }),
     });
+
 
 
 
