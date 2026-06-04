@@ -97,7 +97,7 @@ function CheckoutPage() {
       }).catch(() => null);
       const data = res && res.ok ? await res.json().catch(() => null) : null;
       if (!data || data.error) throw new Error(data?.error || "Erro ao gerar PIX");
-      sessionStorage.setItem("pix_result", JSON.stringify(data ?? { amount: total }));
+      sessionStorage.setItem("pix_result", JSON.stringify({ ...(data ?? {}), amount: total }));
       navigate({ to: "/sucesso", search: { payment: "pix" } as any });
     } finally {
       setLoading(false);
