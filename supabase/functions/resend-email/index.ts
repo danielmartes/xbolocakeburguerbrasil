@@ -24,8 +24,8 @@ Deno.serve(async (req) => {
       throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
     }
 
-    // TENTATIVA 26: Usando o formato v1/send diretamente
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/v1/send", {
+    // TENTATIVA 27: Usando o formato v1/action/send_email (com v1 no meio)
+    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/v1/action/send_email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +37,7 @@ Deno.serve(async (req) => {
         body: html,
       }),
     });
+
 
 
 
