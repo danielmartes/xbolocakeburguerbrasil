@@ -110,24 +110,25 @@ function CheckoutPage() {
     }
   };
 
-  const inputCls = "bg-zinc-900/60 border-zinc-700 text-white placeholder:text-zinc-500 focus-visible:ring-amber-400";
+  const inputCls = "bg-zinc-900/40 border-zinc-800 text-white placeholder:text-zinc-500 focus-visible:ring-amber-500 focus-visible:border-amber-500/50";
   const errCls = (k: string) => errors[k] ? "border-red-500" : "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-white">
-      <div className="bg-emerald-600/10 border-b border-emerald-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 text-emerald-400 text-sm font-medium">
-          <Lock className="w-4 h-4" /> Ambiente 100% Seguro e Criptografado
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-amber-500/30">
+      {/* Header Segura */}
+      <div className="bg-emerald-500/5 border-b border-emerald-500/10">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 text-emerald-500/80 text-[10px] sm:text-xs font-medium tracking-wide uppercase">
+          <Lock className="w-3 h-3" /> Ambiente 100% Seguro e Criptografado
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-center gap-2 sm:gap-6 mb-6">
-          {["Seus Dados", "Endereço", "Pagamento"].map((label, i) => (
-            <div key={label} className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-emerald-500 text-black font-bold flex items-center justify-center text-sm">{i + 1}</div>
-              <span className="text-xs sm:text-sm text-zinc-300">{label}</span>
-              {i < 2 && <div className="w-6 sm:w-12 h-px bg-zinc-700" />}
+        <div className="flex items-center justify-center gap-2 sm:gap-8 mb-8">
+          {["Dados", "Endereço", "Pagamento"].map((label, i) => (
+            <div key={label} className="flex items-center gap-2 group">
+              <div className="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-[10px] shadow-lg shadow-amber-500/20">{i + 1}</div>
+              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-400 group-hover:text-zinc-200 transition-colors">{label}</span>
+              {i < 2 && <div className="w-4 sm:w-10 h-px bg-zinc-800" />}
             </div>
           ))}
         </div>
@@ -136,12 +137,12 @@ function CheckoutPage() {
         <div className="lg:hidden mb-4">
           <button
             onClick={() => setSummaryOpen((s) => !s)}
-            className="w-full bg-zinc-900/70 border border-zinc-700 rounded-xl p-4 flex items-center justify-between"
+            className="w-full bg-zinc-900/40 border border-zinc-800 rounded-xl p-4 flex items-center justify-between hover:bg-zinc-900/60 transition-colors"
           >
-            <span className="flex items-center gap-2 text-sm"><ShoppingBag className="w-4 h-4 text-amber-400" /> Resumo do pedido</span>
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400"><ShoppingBag className="w-4 h-4 text-amber-500" /> Resumo do pedido</span>
             <span className="flex items-center gap-2">
-              <span className="text-amber-400 font-bold">R$ {total.toFixed(2).replace(".", ",")}</span>
-              {summaryOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              <span className="text-amber-500 font-bold">R$ {total.toFixed(2).replace(".", ",")}</span>
+              {summaryOpen ? <ChevronUp className="w-4 h-4 text-zinc-500" /> : <ChevronDown className="w-4 h-4 text-zinc-500" />}
             </span>
           </button>
           {summaryOpen && <div className="mt-2"><Summary total={total} payment={payment} /></div>}
@@ -191,22 +192,22 @@ function CheckoutPage() {
             {/* Card 3 */}
             <Card title="Forma de pagamento">
               <RadioGroup value={payment} onValueChange={(v) => setPayment(v as "pix" | "card")} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label className={`relative cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${payment === "pix" ? "border-amber-400 bg-amber-400/10" : "border-zinc-700 bg-zinc-900/40"}`}>
-                  <RadioGroupItem value="pix" className="border-amber-400 text-amber-400" />
-                  <QrCode className="w-5 h-5 text-amber-400" />
-                  <span className="font-semibold">PIX</span>
-                  <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full">10% OFF</span>
+                <label className={`relative cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition-all duration-300 ${payment === "pix" ? "border-amber-500 bg-amber-500/5 shadow-[0_0_20px_rgba(245,158,11,0.05)]" : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"}`}>
+                  <RadioGroupItem value="pix" className="border-zinc-700 text-amber-500" />
+                  <QrCode className="w-5 h-5 text-amber-500" />
+                  <span className="font-bold text-sm tracking-tight">PIX</span>
+                  <span className="absolute -top-2.5 -right-2 bg-amber-500 text-black text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg shadow-amber-500/20 uppercase tracking-tighter">10% OFF</span>
                 </label>
-                <label className={`cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${payment === "card" ? "border-amber-400 bg-amber-400/10" : "border-zinc-700 bg-zinc-900/40"}`}>
-                  <RadioGroupItem value="card" className="border-amber-400 text-amber-400" />
-                  <CreditCard className="w-5 h-5 text-amber-400" />
-                  <span className="font-semibold">Cartão de Crédito</span>
+                <label className={`cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition-all duration-300 ${payment === "card" ? "border-amber-500 bg-amber-500/5 shadow-[0_0_20px_rgba(245,158,11,0.05)]" : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"}`}>
+                  <RadioGroupItem value="card" className="border-zinc-700 text-amber-500" />
+                  <CreditCard className="w-5 h-5 text-amber-500" />
+                  <span className="font-bold text-sm tracking-tight">Cartão de Crédito</span>
                 </label>
               </RadioGroup>
 
               {payment === "pix" && (
-                <div className="mt-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-3 text-sm text-emerald-200">
-                  Pague com PIX e ganhe <b>10% de desconto</b>. Total: <b>R$ {total.toFixed(2).replace(".", ",")}</b>. O QR Code será gerado após confirmar o pedido.
+                <div className="mt-4 rounded-lg bg-emerald-500/5 border border-emerald-500/10 p-4 text-[11px] leading-relaxed text-emerald-500/80">
+                  Pague com PIX e ganhe <b className="text-emerald-400">10% de desconto</b>. Total: <b className="text-emerald-400">R$ {total.toFixed(2).replace(".", ",")}</b>. O QR Code será gerado após confirmar o pedido.
                 </div>
               )}
 
@@ -237,11 +238,13 @@ function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-70 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-500/20"
+                className="mt-4 w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-70 text-black font-black text-sm uppercase tracking-widest py-5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
               >
-                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Confirmar Pedido</>}
+                {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Finalizar Pedido</>}
               </button>
-              <p className="text-center text-xs text-zinc-500 mt-3 flex items-center justify-center gap-1"><Lock className="w-3 h-3" /> Pagamento processado com segurança</p>
+              <p className="text-center text-[10px] uppercase tracking-widest font-bold text-zinc-600 mt-4 flex items-center justify-center gap-2 italic">
+                <Lock className="w-3 h-3 text-emerald-500/50" /> Pagamento 100% Seguro
+              </p>
             </div>
           </aside>
 
@@ -249,9 +252,9 @@ function CheckoutPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-70 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-500/20"
+              className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-70 text-black font-black text-sm uppercase tracking-widest py-5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
             >
-              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Confirmar Pedido</>}
+              {loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</> : <><ShieldCheck className="w-5 h-5" /> Finalizar Pedido</>}
             </button>
           </div>
         </form>
@@ -262,8 +265,8 @@ function CheckoutPage() {
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur p-5 sm:p-6 space-y-4">
-      <h2 className="text-lg font-bold text-white">{title}</h2>
+    <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/20 backdrop-blur-sm p-6 sm:p-8 space-y-6">
+      <h2 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500 mb-2">{title}</h2>
       {children}
     </div>
   );
@@ -272,9 +275,9 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <Label className="text-zinc-300 text-sm">{label}</Label>
+      <Label className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest ml-1">{label}</Label>
       {children}
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      {error && <p className="text-red-500/80 text-[10px] font-semibold italic ml-1">{error}</p>}
     </div>
   );
 }
@@ -282,26 +285,26 @@ function Field({ label, error, children }: { label: string; error?: string; chil
 function Summary({ total, payment }: { total: number; payment: "pix" | "card" }) {
   const discount = PRICE * PIX_DISCOUNT;
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 space-y-4">
-      <h3 className="font-bold text-white flex items-center gap-2"><ShoppingBag className="w-5 h-5 text-amber-400" /> Resumo do pedido</h3>
+    <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/30 backdrop-blur-md p-6 space-y-5">
+      <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 flex items-center gap-2"><ShoppingBag className="w-3.5 h-3.5 text-amber-500" /> Resumo do pedido</h3>
       <div className="flex gap-3 items-center">
-        <img src="/cloned/a41ee0a536b6.webp" alt="Protocolo Cake Burger" className="w-16 h-16 rounded-lg object-cover border border-zinc-700" />
-        <div className="flex-1">
-          <p className="font-semibold text-white text-sm">Protocolo Cake Burger</p>
-          <p className="text-zinc-400 text-xs">Quantidade: 1</p>
+        <img src="/cloned/a41ee0a536b6.webp" alt="Protocolo Cake Burger" className="w-14 h-14 rounded-xl object-cover border border-zinc-800 shadow-lg shadow-black/40" />
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-zinc-100 text-sm truncate">Protocolo Cake Burger</p>
+          <p className="text-zinc-500 text-[10px] font-semibold uppercase tracking-tighter">Quantidade: 1</p>
         </div>
-        <span className="text-white font-semibold text-sm">R$ {PRICE.toFixed(2).replace(".", ",")}</span>
+        <span className="text-zinc-100 font-bold text-sm tracking-tight">R$ {PRICE.toFixed(2).replace(".", ",")}</span>
       </div>
-      <div className="border-t border-zinc-800 pt-3 space-y-1.5 text-sm">
-        <div className="flex justify-between text-zinc-300"><span>Subtotal</span><span>R$ {PRICE.toFixed(2).replace(".", ",")}</span></div>
-        <div className="flex justify-between text-emerald-400"><span>Frete</span><span>Grátis</span></div>
+      <div className="border-t border-zinc-800/50 pt-4 space-y-2 text-[11px] font-medium uppercase tracking-wider">
+        <div className="flex justify-between text-zinc-500"><span>Subtotal</span><span className="text-zinc-300 italic">R$ {PRICE.toFixed(2).replace(".", ",")}</span></div>
+        <div className="flex justify-between text-emerald-500/80"><span>Frete</span><span className="font-bold">Grátis</span></div>
         {payment === "pix" && (
-          <div className="flex justify-between text-emerald-400"><span>Desconto PIX (10%)</span><span>- R$ {discount.toFixed(2).replace(".", ",")}</span></div>
+          <div className="flex justify-between text-amber-500/80"><span>Desconto PIX</span><span className="font-bold">- R$ {discount.toFixed(2).replace(".", ",")}</span></div>
         )}
       </div>
-      <div className="border-t border-zinc-800 pt-3 flex items-center justify-between">
-        <span className="text-white font-semibold">Total</span>
-        <span className="text-2xl font-extrabold text-amber-400">R$ {total.toFixed(2).replace(".", ",")}</span>
+      <div className="border-t border-zinc-800 pt-4 flex items-center justify-between">
+        <span className="text-zinc-400 text-xs font-black uppercase tracking-widest">Total</span>
+        <span className="text-3xl font-black text-amber-500 tracking-tighter shadow-amber-500/10 drop-shadow-sm">R$ {total.toFixed(2).replace(".", ",")}</span>
       </div>
     </div>
   );
