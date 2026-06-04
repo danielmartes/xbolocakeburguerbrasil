@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import bodyHtml from "../../public/cloned/body.html?raw";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Protocolo Cake Burger — O doce que vira febre" },
