@@ -265,8 +265,8 @@ function CheckoutPage() {
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur p-5 sm:p-6 space-y-4">
-      <h2 className="text-lg font-bold text-white">{title}</h2>
+    <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/20 backdrop-blur-sm p-6 sm:p-8 space-y-6">
+      <h2 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500 mb-2">{title}</h2>
       {children}
     </div>
   );
