@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
       throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
     }
 
-    // TENTATIVA 23: Usando o formato v1/action com os parâmetros corretos para o conector Gmail
+    // TENTATIVA 24: Usando o formato v1/action com os parâmetros encapsulados
     const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/v1/action", {
       method: "POST",
       headers: {
@@ -33,11 +33,14 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         action: "send_email",
-        to,
-        subject,
-        body: html,
+        parameters: {
+          to,
+          subject,
+          body: html,
+        }
       }),
     });
+
 
 
 
