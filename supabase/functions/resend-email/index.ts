@@ -16,47 +16,59 @@ Deno.serve(async (req) => {
 
   try {
     const { to, subject, html } = (await req.json()) as EmailRequest;
-    console.log(`[resend-email] Enviando via Gateway para: ${to}`);
+    console.log(`[resend-email] Enviando via Gmail para: ${to}`);
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const GMAIL_API_KEY = Deno.env.get("GOOGLE_MAIL_API_KEY");
     
-    // Tentativa de envio usando o gateway do Lovable para o conector Gmail
-    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/send", {
+    if (!GMAIL_API_KEY) {
+      throw new Error("GOOGLE_MAIL_API_KEY não configurada nas variáveis de ambiente.");
+    }
+
+    // Chamada direta para a API do conector Gmail via Lovable Gateway
+    const response = await fetch("https://api.lovable.dev/v1/connectors/google_mail/action", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+        "Authorization": `Bearer ${GMAIL_API_KEY}`,
       },
       body: JSON.stringify({
-        to,
-        subject,
-        body: html,
-        is_html: true
+        action: "send_email",
+        parameters: {
+          to,
+          subject,
+          body: html,
+        }
       }),
     });
 
+    const result = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error("[resend-email] Erro no Gateway:", errorData);
-      // Mesmo com erro no gateway, vamos registrar o log para depuração
-    } else {
-      console.log("[resend-email] Gateway respondeu com sucesso");
+      console.error("[resend-email] Erro no Gateway:", result);
+      throw new Error(`Erro ao enviar e-mail: ${JSON.stringify(result)}`);
     }
+
+    console.log("[resend-email] E-mail enviado com sucesso:", result);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      message: "Processado",
-      recipient: to
+      message: "E-mail enviado com sucesso",
+      recipient: to,
+      result
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
     console.error("Error in resend-email:", error.message);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ 
+      success: false,
+      error: error.message 
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 400,
     });
   }
 });
+
 
