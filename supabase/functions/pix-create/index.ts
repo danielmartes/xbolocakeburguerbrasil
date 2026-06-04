@@ -55,9 +55,9 @@ Deno.serve(async (req) => {
 
     const { access_token } = await tokenRes.json();
 
-    // 2. Create Customer (Mandatory for /api/v1/charges/pix according to Quickstart)
+    // 2. Create Customer (Mandatory for /api/v1/customers according to standard REST patterns and QuacPay requirements)
     console.log("Creating QuacPay customer...");
-    const customerRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/create-customer`, {
+    const customerRes = await fetch(`${QUACPAY_BASE_URL}/api/v1/customers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,9 +79,10 @@ Deno.serve(async (req) => {
     }
 
     const customerData = await customerRes.json();
-    const customerId = customerData.id || customerData.data?.id;
+    const customerId = customerData.id || customerData.data?.id || (typeof customerData === 'string' ? customerData : null);
 
     if (!customerId) {
+      console.error("Invalid customer data received:", customerData);
       throw new Error("Customer ID not returned by QuacPay");
     }
 
