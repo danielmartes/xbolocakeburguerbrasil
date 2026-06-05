@@ -112,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const PIXEL_ID = '971652248979019';
+  const PIXEL_ID = '1002615356058923';
   
   return (
     <html lang="en">
@@ -143,7 +143,7 @@ function RootComponent() {
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const PIXEL_ID = '971652248979019';
+      const PIXEL_ID = '1002615356058923';
       (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
         if (f.fbq) return;
         n = f.fbq = function() {

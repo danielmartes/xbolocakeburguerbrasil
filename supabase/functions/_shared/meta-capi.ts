@@ -1,6 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
-const PIXEL_ID = Deno.env.get("META_PIXEL_ID") || "971652248979019";
+const PIXEL_ID = Deno.env.get("META_PIXEL_ID") || "1002615356058923";
 const ACCESS_TOKEN = Deno.env.get("META_ACCESS_TOKEN");
 
 export async function trackMetaConversion(eventName: string, userData: any, customData: any = {}) {
