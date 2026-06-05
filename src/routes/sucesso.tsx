@@ -57,7 +57,7 @@ function SuccessPage() {
 
     const interval = setInterval(() => {
       checkStatus(pix.chargeId!);
-    }, 5000); // Check every 5 seconds
+    }, 3000); // Check every 3 seconds
 
     return () => clearInterval(interval);
   }, [pix?.chargeId, status]);
@@ -71,7 +71,9 @@ function SuccessPage() {
 
       if (data === "paid") {
         setStatus("paid");
-        toast.success("Pagamento confirmado! Seu acesso foi liberado.");
+        toast.success("✅ Pagamento confirmado! Seu acesso foi liberado.", {
+          duration: 8000,
+        });
       }
     } catch (err) {
       console.error("Error checking status:", err);
@@ -99,7 +101,10 @@ function SuccessPage() {
   if (status === "paid") {
     return (
       <div className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white flex items-center justify-center p-4">
-        <div className="max-w-lg w-full rounded-2xl border border-emerald-500/30 bg-zinc-900/60 p-8 text-center space-y-6">
+        <div className="max-w-lg w-full rounded-2xl border-2 border-emerald-500/50 bg-zinc-900/60 p-8 text-center space-y-6 shadow-2xl shadow-emerald-500/20">
+          <div className="-mx-8 -mt-8 mb-2 rounded-t-2xl bg-emerald-500 px-4 py-3 text-center text-sm font-extrabold uppercase tracking-widest text-black animate-pulse">
+            ✓ Pagamento confirmado com sucesso
+          </div>
           <div className="relative inline-block">
             <div className="absolute -inset-1 bg-emerald-500 rounded-full blur opacity-25 animate-pulse"></div>
             <CheckCircle2 className="w-20 h-20 text-emerald-400 relative" />
