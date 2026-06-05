@@ -57,7 +57,7 @@ function SuccessPage() {
 
     const interval = setInterval(() => {
       checkStatus(pix.chargeId!);
-    }, 5000); // Check every 5 seconds
+    }, 3000); // Check every 3 seconds
 
     return () => clearInterval(interval);
   }, [pix?.chargeId, status]);
@@ -71,7 +71,9 @@ function SuccessPage() {
 
       if (data === "paid") {
         setStatus("paid");
-        toast.success("Pagamento confirmado! Seu acesso foi liberado.");
+        toast.success("✅ Pagamento confirmado! Seu acesso foi liberado.", {
+          duration: 8000,
+        });
       }
     } catch (err) {
       console.error("Error checking status:", err);
