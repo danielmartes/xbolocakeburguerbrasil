@@ -9,6 +9,14 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useMemo } from "react";
+import { useRouterState } from "@tanstack/react-router";
+
+declare global {
+  interface Window {
+    fbq: any;
+    _fbq: any;
+  }
+}
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
