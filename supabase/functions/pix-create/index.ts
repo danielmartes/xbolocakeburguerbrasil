@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { trackMetaConversion } from "../_shared/meta-capi.ts";
 
 const QUACPAY_BASE_URL = "https://quacpay.com";
 
@@ -110,6 +111,26 @@ Deno.serve(async (req) => {
       throw new Error(
         `${pixData.message || pixData.error || "Failed to create PIX charge"}${pixData.code ? ` (${pixData.code})` : ""}${pixData.request_id ? ` [${pixData.request_id}]` : ""}`
       );
+    }
+
+    // Track Lead conversion via CAPI
+    try {
+      const userAgent = req.headers.get("user-agent") || "";
+      const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0] || "";
+      
+      await trackMetaConversion("Lead", {
+        email,
+        phone: phoneDigits,
+        name,
+        userAgent,
+        ip
+      }, {
+        value: amount,
+        currency: "BRL",
+        content_name: productName
+      });
+    } catch (e) {
+      console.error("Meta CAPI tracking failed:", e);
     }
 
     // Persist order so the webhook can update its status

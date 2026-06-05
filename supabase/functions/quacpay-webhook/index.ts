@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { trackMetaConversion } from "../_shared/meta-capi.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -92,9 +93,28 @@ Deno.serve(async (req) => {
     if (status === "paid") {
       const { data: order } = await supabase
         .from("orders")
-        .select("customer_email, customer_name")
+        .select("customer_email, customer_name, customer_phone, amount, product_name")
         .eq("external_id", String(externalId))
         .single();
+
+      if (order) {
+        // Track Purchase via CAPI
+        try {
+          await trackMetaConversion("Purchase", {
+            email: order.customer_email,
+            phone: order.customer_phone,
+            name: order.customer_name,
+            userAgent: req.headers.get("user-agent") || "",
+            ip: req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0] || ""
+          }, {
+            value: order.amount,
+            currency: "BRL",
+            content_name: order.product_name
+          });
+        } catch (e) {
+          console.error("Meta CAPI Purchase tracking failed:", e);
+        }
+      }
 
       if (order?.customer_email) {
         console.log(`Sending deliverable to ${order.customer_email}`);
