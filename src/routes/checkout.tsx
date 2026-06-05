@@ -5,6 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
+declare global {
+  interface Window {
+    fbq: any;
+  }
+}
+
 export const Route = createFileRoute("/checkout")({
   ssr: false,
   head: () => ({
@@ -41,6 +47,14 @@ function CheckoutPage() {
       const b = localStorage.getItem("checkout_buyer");
       if (b) setBuyer(JSON.parse(b));
     } catch {}
+    
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'InitiateCheckout', {
+        value: total,
+        currency: 'BRL',
+        content_name: 'Protocolo Cake Burger'
+      });
+    }
   }, []);
 
   const total = PRICE * (1 - PIX_DISCOUNT);
