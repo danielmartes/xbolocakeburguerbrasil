@@ -40,6 +40,16 @@ function SuccessPage() {
       }
     } catch {}
   }, []);
+  
+  useEffect(() => {
+    if (status === "paid" && typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Purchase', {
+        value: pix?.amount || 15.90,
+        currency: 'BRL',
+        content_name: 'Protocolo Cake Burger'
+      });
+    }
+  }, [status, pix?.amount]);
 
   // Polling for payment status
   useEffect(() => {
