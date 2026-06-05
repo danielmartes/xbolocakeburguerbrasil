@@ -9,7 +9,12 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useMemo } from "react";
-
+declare global {
+  interface Window {
+    fbq: any;
+    _fbq: any;
+  }
+}
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -106,10 +111,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const PIXEL_ID = '971652248979019';
+  
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
       </head>
       <body>
         {children}
@@ -121,6 +137,37 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  const currentPath = routerState.location.pathname;
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const PIXEL_ID = '971652248979019';
+      (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL_ID);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView');
+    }
+  }, [currentPath]);
 
   return (
     <QueryClientProvider client={queryClient}>
