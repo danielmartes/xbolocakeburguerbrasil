@@ -49,7 +49,7 @@ Deno.serve(async (req) => {
 
     const data = payload.data ?? payload.charge ?? payload;
     const externalId =
-      data.id || data.charge_id || data.transaction_id || payload.id;
+      data.payment_id || data.id || data.charge_id || data.transaction_id || payload.id;
     const statusRaw = data.status || payload.status || payload.event;
 
     if (!externalId) {
