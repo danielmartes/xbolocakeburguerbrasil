@@ -29,47 +29,16 @@ function SuccessPage() {
   const [checking, setChecking] = useState(false);
 
   useEffect(() => {
-    let channel: any;
-
     try {
       const raw = sessionStorage.getItem("pix_result");
       if (raw) {
         const data = JSON.parse(raw);
         setPix(data);
         if (data.chargeId) {
-          // Initial check
           checkStatus(data.chargeId);
-
-          // SET UP REALTIME SUBSCRIPTION FOR INSTANT UPDATE
-          channel = supabase
-            .channel(`order-status-${data.chargeId}`)
-            .on(
-              'postgres_changes',
-              {
-                event: 'UPDATE',
-                schema: 'public',
-                table: 'orders',
-                filter: `external_id=eq.${data.chargeId}`
-              },
-              (payload) => {
-                const newStatus = payload.new.status?.toLowerCase();
-                const isPaid = ["paid", "approved", "completed", "confirmed", "succeeded", "received"].includes(newStatus);
-                if (isPaid) {
-                  setStatus("paid");
-                  toast.success("✅ Pagamento confirmado instantaneamente!", { duration: 8000 });
-                }
-              }
-            )
-            .subscribe();
         }
       }
-    } catch (err) {
-      console.error("Setup error:", err);
-    }
-
-    return () => {
-      if (channel) supabase.removeChannel(channel);
-    };
+    } catch {}
   }, []);
   
   useEffect(() => {
@@ -96,20 +65,11 @@ function SuccessPage() {
   const checkStatus = async (chargeId: string) => {
     try {
       setChecking(true);
-      
-      // Use Realtime-first approach: Check current state
-      const { data, error } = await supabase
-        .from("orders")
-        .select("status")
-        .eq("external_id", chargeId)
-        .maybeSingle();
+      const { data } = await supabase.rpc("get_order_status", {
+        p_external_id: chargeId,
+      });
 
-      if (error) throw error;
-
-      // Status mapping consistent with webhook
-      const isPaid = data?.status && ["paid", "approved", "completed", "confirmed", "succeeded", "received"].includes(data.status.toLowerCase());
-
-      if (isPaid) {
+      if (data === "paid") {
         setStatus("paid");
         toast.success("✅ Pagamento confirmado! Seu acesso foi liberado.", {
           duration: 8000,
