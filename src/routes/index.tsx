@@ -6,17 +6,17 @@ export const Route = createFileRoute("/")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Protocolo Cake Burger — O doce que vira febre" },
+      { title: "Protocolo Cake Burger — Mude sua Realidade Financeira" },
       {
         name: "description",
         content:
-          "Crie Cake Burgers irresistíveis e transforme curiosidade em pedidos pelo Instagram e WhatsApp.",
+          "Aprenda o método completo do Cake Burger com as melhores confeiteiras do Brasil e conquiste clientes desde o primeiro olhar.",
       },
       { property: "og:title", content: "Protocolo Cake Burger" },
       {
         property: "og:description",
         content:
-          "O doce que faz clientes perguntarem como comprar antes mesmo de saber o preço.",
+          "Descubra como criar um produto que chama atenção e muda sua realidade financeira.",
       },
     ],
     links: [
