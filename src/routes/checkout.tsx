@@ -40,7 +40,7 @@ function CheckoutPage() {
   const [buyer, setBuyer] = useState<Buyer>({ name: "", email: "", phone: "", cpf: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
-  const [summaryOpen, setSummaryOpen] = useState(false);
+  const [summaryOpen, setSummaryOpen] = useState(true);
 
   useEffect(() => {
     try {
