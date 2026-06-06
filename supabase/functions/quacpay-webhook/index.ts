@@ -10,7 +10,7 @@ const corsHeaders = {
 const mapStatus = (raw: string | undefined): string => {
   if (!raw) return "pending";
   const s = raw.toLowerCase();
-  if (["paid", "approved", "completed", "confirmed", "succeeded"].includes(s)) return "paid";
+  if (["paid", "approved", "completed", "confirmed", "succeeded", "received"].includes(s)) return "paid";
   if (["refunded", "chargeback"].includes(s)) return "refunded";
   if (["canceled", "cancelled", "failed", "expired"].includes(s)) return "canceled";
   return "pending";
