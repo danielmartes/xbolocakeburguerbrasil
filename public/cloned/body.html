@@ -273,76 +273,109 @@
         </div>
       </div>
     </section>
-    <section id="oferta" class="px-5 py-16 md:px-8">
-      <div class="mx-auto max-w-2xl">
-        <div class="bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] shadow-2xl relative overflow-hidden rounded-[3rem] border border-white/10 p-8 text-center text-white md:p-12">
-          <div class="pointer-events-none absolute -top-20 -left-20 h-60 w-60 rounded-full bg-accent/20 blur-3xl" aria-hidden="true"></div>
-          <div class="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
-          <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_60%)]" aria-hidden="true"></div>
-          <div class="relative">
-            <span class="bg-gradient-gold text-black inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-black uppercase tracking-widest shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3" aria-hidden="true">
-                <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
-              </svg>
-              Oferta Premium • Vagas Limitadas
-            </span>
-            <h2 class="font-display mt-6 text-4xl leading-tight md:text-6xl font-black text-white italic tracking-tighter">Protocolo Cake Burger</h2>
-            <div class="h-1 w-20 bg-accent mx-auto mt-4 rounded-full"></div>
-            <p class="mt-4 text-base opacity-90 md:text-lg font-medium text-accent">Material Completo + Entrega Imediata</p>
-            
-            <div class="mt-10 mb-8 p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <h3 class="text-accent text-xs font-black uppercase tracking-[0.2em] mb-6">O que você vai receber:</h3>
-              <ul class="mx-auto grid gap-4 text-left">
-                <li class="flex items-center gap-3 group">
-                  <div class="h-6 w-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40 group-hover:bg-accent group-hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
-                  </div>
-                  <span class="text-white font-semibold">Planilha de precificação</span>
-                </li>
-                <li class="flex items-center gap-3 group">
-                  <div class="h-6 w-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40 group-hover:bg-accent group-hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
-                  </div>
-                  <span class="text-white font-semibold">Método instagram de confeitaria</span>
-                </li>
-                <li class="flex items-center gap-3 group">
-                  <div class="h-6 w-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40 group-hover:bg-accent group-hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
-                  </div>
-                  <span class="text-white font-semibold">+70 frases prontas para whatsapp</span>
-                </li>
-                <li class="flex items-center gap-3 group">
-                  <div class="h-6 w-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40 group-hover:bg-accent group-hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
-                  </div>
-                  <span class="text-white font-semibold italic">Acesso Vitalício Garantido</span>
-                </li>
-              </ul>
+    <section id="ofertas" class="px-5 py-16 md:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="grid gap-8 md:grid-cols-2">
+          <!-- Card Básico -->
+          <div class="bg-card shadow-soft relative overflow-hidden rounded-[3rem] border border-accent/20 p-8 text-center md:p-10 transition-all hover:shadow-xl group">
+            <div class="absolute top-0 right-0 left-0 bg-accent py-2 text-[10px] font-black uppercase tracking-[0.2em] text-black">
+              Básico
             </div>
-
-            <div class="my-10">
-              <p class="text-xs uppercase tracking-[0.3em] text-white/50 mb-1">De R$ 89,90 por apenas</p>
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-3xl font-black text-white/80 self-start mt-2">R$</span>
-                <p class="font-display text-8xl font-black leading-none tracking-tighter text-white">9<span class="text-4xl">,90</span></p>
+            <div class="mt-6">
+              <h2 class="font-display text-3xl font-black text-foreground italic tracking-tighter">Protocolo Cake Burger</h2>
+              <p class="mt-2 text-xs font-bold uppercase tracking-widest text-accent">Material Completo + Entrega Imediata</p>
+              
+              <div class="mt-8 mb-8 text-left">
+                <p class="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-4">O que você vai receber:</p>
+                <ul class="grid gap-3">
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full border border-accent/30 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-foreground/80">Planilha de precificação</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full border border-accent/30 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-foreground/80">Método instagram de confeitaria</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full border border-accent/30 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-foreground/80">+70 frases prontas para whatsapp</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full border border-accent/30 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold italic text-foreground/80">Acesso Vitalício Garantido</span>
+                  </li>
+                </ul>
               </div>
-              <p class="mt-4 inline-block bg-accent/10 text-accent px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-accent/20">Pagamento Único • Sem Mensalidades</p>
+
+              <div class="mb-8">
+                <p class="text-[10px] uppercase tracking-widest text-muted-foreground line-through">De R$ 89,90</p>
+                <div class="flex items-center justify-center gap-1">
+                  <span class="text-xl font-black text-foreground/60">R$</span>
+                  <p class="text-6xl font-black leading-none tracking-tighter text-foreground">9<span class="text-2xl">,90</span></p>
+                </div>
+              </div>
+
+              <a href="#ofertas" class="cta-offer-button bg-accent text-black inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-black uppercase tracking-tighter transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+                <span>Quero acesso vitalício agora</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </a>
             </div>
+          </div>
 
-            <a href="#oferta" class="cta-offer-button bg-accent text-black relative overflow-hidden inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-6 text-xl font-black uppercase tracking-tighter transition-all hover:scale-[1.03] active:scale-[0.98] shadow-[0_20px_50px_rgba(255,223,0,0.3)]">
-              <span class="relative z-10">Quero Acesso Vitalício Agora</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 relative z-10"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-            </a>
+          <!-- Card Premium (Antiga Oferta) -->
+          <div class="bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] shadow-2xl relative overflow-hidden rounded-[3rem] border border-white/10 p-8 text-center text-white md:p-10 transition-all hover:scale-[1.02]">
+            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_60%)]" aria-hidden="true"></div>
+            <div class="relative">
+              <span class="bg-gradient-gold text-black inline-flex items-center gap-1.5 rounded-full px-4 py-1 text-[10px] font-black uppercase tracking-widest shadow-lg">
+                Oferta Premium
+              </span>
+              <h2 class="font-display mt-6 text-3xl font-black text-white italic tracking-tighter">Protocolo Cake Burger</h2>
+              <p class="mt-2 text-xs font-bold uppercase tracking-widest text-accent">Curso Completo + 4 Bônus</p>
+              
+              <div class="mt-8 mb-8 text-left">
+                <p class="text-[10px] font-black uppercase tracking-widest text-white/50 mb-4">O que você vai receber:</p>
+                <ul class="grid gap-3">
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-white/90">Curso Completo Protocolo</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-white/90">4 Bônus Exclusivos inclusos</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <div class="h-5 w-5 rounded-full bg-accent/20 flex items-center justify-center border border-accent/40">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 text-accent"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-white/90">Suporte Direto com o Time</span>
+                  </li>
+                </ul>
+              </div>
 
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-widest text-white/60">
-              <span class="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-accent"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                Garantia Incondicional
-              </span>
-              <span class="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-accent"><path d="m5 12 5 5L20 7"></path></svg>
-                Entrega via E-mail
-              </span>
+              <div class="mb-8">
+                <p class="text-[10px] uppercase tracking-widest text-white/40 line-through">De R$ 197,00</p>
+                <div class="flex items-center justify-center gap-1">
+                  <span class="text-xl font-black text-white/80">R$</span>
+                  <p class="text-6xl font-black leading-none tracking-tighter text-white">15<span class="text-2xl">,90</span></p>
+                </div>
+              </div>
+
+              <a href="#ofertas" class="cta-offer-button bg-accent text-black inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-black uppercase tracking-tighter transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_15px_40px_rgba(255,223,0,0.25)]">
+                <span>Quero acesso completo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </a>
             </div>
           </div>
         </div>
